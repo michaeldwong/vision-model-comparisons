@@ -6,7 +6,6 @@ from PIL import  Image
 # Define the image path
 image_path = "frame3600.jpg"
 
-print('starting')
 
 transform = torchvision.transforms.Compose([
     torchvision.transforms.Resize((224, 224)),
@@ -21,11 +20,13 @@ classifiers = { 'ResNet50' : torchvision.models.resnet50(pretrained=True),
                 'EfficientNet B7' : torchvision.models.efficientnet_b7(pretrained=True),
                 'MobileNet V2' : torchvision.models.mobilenet_v2(pretrained=True),
                 'SSD' : torchvision.models.detection.ssd300_vgg16(pretrained=True),
-                'Faster RCNN' : torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True),
+                'Faster RCNN ResNet50' : torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True),
+                'Faster RCNN MobileNet' : torchvision.models.detection.fasterrcnn_mobilenet_v3_large_320_fpn(pretrained=True),
                 'Mask RCNN ' :  torchvision.models.detection.maskrcnn_resnet50_fpn(pretrained=True),
                 'RetinaNet' : torchvision.models.detection.retinanet_resnet50_fpn(pretrained=True)
                 }
 import time
+batch_size = 4
 
 
 # Run each classifier on the image
@@ -35,13 +36,17 @@ for n in classifiers:
     print('timing ', n)
     print(f"Number of parameters: {sum(torch.numel(param) for param in model.parameters())}")
     model.to('cuda:0') 
-    for _ in range(2000): 
-        image = Image.open(image_path)
-        image = transform(image)
-        image = image.to('cuda:0')
+    for _i in range(50): 
+        images = []
+        for _ in range(batch_size):
+            image = Image.open(image_path)
+            image = transform(image)
+            image = image.to('cuda:0')
+            images.append(image)
+        batch = torch.stack(images) 
         with torch.no_grad():
             model.eval()
-            output = model(image.unsqueeze(0))
+            output = model(batch)
 #            probabilities = torch.nn.functional.softmax(output, dim=1)
 
     t1 = time.time()
