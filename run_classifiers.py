@@ -35,13 +35,13 @@ for n in classifiers:
     model = classifiers[n]
     print('timing ', n)
     print(f"Number of parameters: {sum(torch.numel(param) for param in model.parameters())}")
-    model.to('cuda:0') 
-    for _i in range(50): 
+    model.to('cuda:1') 
+    for _i in range(1000): 
         images = []
         for _ in range(batch_size):
             image = Image.open(image_path)
             image = transform(image)
-            image = image.to('cuda:0')
+            image = image.to('cuda:1')
             images.append(image)
         batch = torch.stack(images) 
         with torch.no_grad():
