@@ -9,6 +9,7 @@ import time
 from datetime import datetime
 
 
+num_iters = 1
 batch_size = 1
 
 
@@ -24,7 +25,7 @@ time.sleep(10)
 print('GPT2 text generation')
 print(datetime.now())
 t0 = time.time()
-for i in range(0, 100):
+for i in range(0, num_iters):
     task_pipe = pipeline(f"text-generation", model=model, device=0)
     output = task_pipe(in_texts, max_length=30, num_return_sequences=3)
 
@@ -47,7 +48,7 @@ time.sleep(10)
 print('T5 translation')
 print(datetime.now())
 t0 = time.time()
-for i in range(0,100):
+for i in range(0,num_iters):
     task_pipe = pipeline("translation_en_to_fr", model=model, max_length=1028, device=0)
     output = task_pipe(in_texts)
 t1 = time.time()
@@ -69,7 +70,7 @@ print('Roberta text classification')
 
 print(datetime.now())
 t0 = time.time()
-for i in range(0,100):
+for i in range(0,num_iters):
     task_pipe = pipeline("text-classification", model=model, device=0)
     output = task_pipe(in_texts)
 
@@ -93,7 +94,7 @@ print('Text summarization')
 
 print(datetime.now())
 t0 = time.time()
-for i in range(0,100):
+for i in range(0,num_iters):
     task_pipe = pipeline("summarization", model=model, device=0)
     output = task_pipe(in_texts)
 t1 = time.time()

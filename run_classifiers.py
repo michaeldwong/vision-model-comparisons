@@ -38,7 +38,7 @@ for n in classifiers:
     print(datetime.now())
     print(f"Number of parameters: {sum(torch.numel(param) for param in model.parameters())}")
     model.to('cuda:0') 
-    for _i in range(100): 
+    for _i in range(1): 
         images = []
         for _ in range(batch_size):
             image = Image.open(image_path)
