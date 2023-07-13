@@ -1,7 +1,7 @@
 import torch
 import torchvision
 from PIL import  Image
-
+from datetime import datetime
 
 # Define the image path
 image_path = "frame3600.jpg"
@@ -26,22 +26,24 @@ classifiers = { 'ResNet50' : torchvision.models.resnet50(pretrained=True),
                 'RetinaNet' : torchvision.models.detection.retinanet_resnet50_fpn(pretrained=True)
                 }
 import time
-batch_size = 4
+batch_size = 1
 
 
 # Run each classifier on the image
 for n in classifiers:
+    time.sleep(10)
     t0 = time.time()
     model = classifiers[n]
     print('timing ', n)
+    print(datetime.now())
     print(f"Number of parameters: {sum(torch.numel(param) for param in model.parameters())}")
-    model.to('cuda:1') 
-    for _i in range(1000): 
+    model.to('cuda:0') 
+    for _i in range(100): 
         images = []
         for _ in range(batch_size):
             image = Image.open(image_path)
             image = transform(image)
-            image = image.to('cuda:1')
+            image = image.to('cuda:0')
             images.append(image)
         batch = torch.stack(images) 
         with torch.no_grad():
