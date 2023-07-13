@@ -49,7 +49,6 @@ for n in classifiers:
         with torch.no_grad():
             model.eval()
             output = model(batch)
-            probabilities = torch.nn.functional.softmax(output, dim=1)
 
     t1 = time.time()
     total = t1-t0

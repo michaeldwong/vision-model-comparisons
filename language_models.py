@@ -9,13 +9,13 @@ import time
 from datetime import datetime
 
 
-num_iters = 50
+num_iters = 100
 batch_size = 1
 
 model = "gpt2"
 in_text = "Hello, I'm a language model"
 task_pipe = pipeline(f"text-generation", model=model, device=0)
-output = task_pipe(in_texts, max_length=30, num_return_sequences=3)
+output = task_pipe(in_text, max_length=30, num_return_sequences=3)
 
 model = 't5-base'
 in_text = "Hello, how are you doing?"
