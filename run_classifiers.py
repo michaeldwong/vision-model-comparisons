@@ -38,7 +38,7 @@ for n in classifiers:
     print(datetime.now())
     print(f"Number of parameters: {sum(torch.numel(param) for param in model.parameters())}")
     model.to('cuda:0') 
-    for _i in range(1): 
+    for _i in range(1000): 
         images = []
         for _ in range(batch_size):
             image = Image.open(image_path)
@@ -49,7 +49,7 @@ for n in classifiers:
         with torch.no_grad():
             model.eval()
             output = model(batch)
-#            probabilities = torch.nn.functional.softmax(output, dim=1)
+            probabilities = torch.nn.functional.softmax(output, dim=1)
 
     t1 = time.time()
     total = t1-t0

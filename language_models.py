@@ -9,12 +9,30 @@ import time
 from datetime import datetime
 
 
-num_iters = 1
+num_iters = 50
 batch_size = 1
 
+model = "gpt2"
+in_text = "Hello, I'm a language model"
+task_pipe = pipeline(f"text-generation", model=model, device=0)
+output = task_pipe(in_texts, max_length=30, num_return_sequences=3)
+
+model = 't5-base'
+in_text = "Hello, how are you doing?"
+task_pipe = pipeline("translation_en_to_fr", model=model, max_length=1028, device=0)
+output = task_pipe(in_text)
+
+model = 'roberta-large-mnli'
+in_text = "This restaurant is awesome"
+task_pipe = pipeline("text-classification", model=model, device=0)
+output = task_pipe(in_text)
+
+model = "stevhliu/my_awesome_billsum_model"
+in_text = "summarize: The Inflation Reduction Act lowers prescription drug costs, health care costs, and energy costs. It's the most aggressive action on tackling the climate crisis in American history, which will lift up American workers and create good-paying, union jobs across the country. It'll lower the deficit and ask the ultra-wealthy and corporations to pay their fair share. And no one making under $400,000 per year will pay a penny more in taxes."
+task_pipe = pipeline("summarization", model=model, device=0)
+output = task_pipe(in_text)
 
 ## Text generation
-#
 model = "gpt2"
 in_texts = []
 in_text = "Hello, I'm a language model"
