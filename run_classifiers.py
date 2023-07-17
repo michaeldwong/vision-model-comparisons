@@ -26,7 +26,7 @@ classifiers = { 'ResNet50' : torchvision.models.resnet50(pretrained=True),
                 'RetinaNet' : torchvision.models.detection.retinanet_resnet50_fpn(pretrained=True)
                 }
 import time
-batch_size = 8
+batch_size = 1
 
 
 # Run each classifier on the image

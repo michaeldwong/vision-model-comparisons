@@ -9,7 +9,7 @@ import time
 from datetime import datetime
 
 
-num_iters = 100
+num_iters = 20
 batch_size = 1
 
 model = "gpt2"
@@ -49,6 +49,7 @@ for i in range(0, num_iters):
 
 t1 = time.time()
 total = t1-t0
+print('Done ', datetime.now())
 print('total ', total)
 print()
 
@@ -71,6 +72,7 @@ for i in range(0,num_iters):
     output = task_pipe(in_texts)
 t1 = time.time()
 total = t1-t0
+print('Done ', datetime.now())
 print('total ', total)
 print()
 
@@ -94,6 +96,7 @@ for i in range(0,num_iters):
 
 t1 = time.time()
 total = t1-t0
+print('Done ', datetime.now())
 print('total ', total)
 print()
 
@@ -117,6 +120,7 @@ for i in range(0,num_iters):
     output = task_pipe(in_texts)
 t1 = time.time()
 total = t1-t0
+print('Done ', datetime.now())
 print('total ', total)
 print()
 
