@@ -26,7 +26,7 @@ classifiers = { 'ResNet50' : torchvision.models.resnet50(pretrained=True),
                 'RetinaNet' : torchvision.models.detection.retinanet_resnet50_fpn(pretrained=True)
                 }
 import time
-batch_size = 1
+batch_size = 8
 
 
 # Run each classifier on the image
@@ -35,10 +35,10 @@ for n in classifiers:
     t0 = time.time()
     model = classifiers[n]
     print('timing ', n)
-    print(datetime.now())
     print(f"Number of parameters: {sum(torch.numel(param) for param in model.parameters())}")
+    print(datetime.now())
     model.to('cuda:0') 
-    for _i in range(1000): 
+    for _i in range(500): 
         images = []
         for _ in range(batch_size):
             image = Image.open(image_path)
@@ -52,6 +52,7 @@ for n in classifiers:
 
     t1 = time.time()
     total = t1-t0
+    print('Done ', datetime.now())
     print('total ', total)
     print()
 

@@ -10,12 +10,12 @@ import time
 from datetime import datetime
 
 
-num_iters = 20
-batch_size = 1
+num_iters = 10000
+batch_size = 8
 
 model = "gpt2"
 in_text = "Hello, I'm a language model"
-task_pipe = pipeline(f"text-generation", model=model, device=0)
+task_pipe = pipeline(f"text-generation", model=model, device=1)
 output = task_pipe(in_text, max_length=30, num_return_sequences=3)
 
 ## Text generation
@@ -30,11 +30,12 @@ print('GPT2 text generation')
 print(datetime.now())
 t0 = time.time()
 for i in range(0, num_iters):
-    task_pipe = pipeline(f"text-generation", model=model, device=0)
+    task_pipe = pipeline(f"text-generation", model=model, device=1)
     output = task_pipe(in_texts, max_length=30, num_return_sequences=3)
 
 t1 = time.time()
 total = t1-t0
+print('Done ', datetime.now())
 print('GPT2 total ', total)
 print()
 

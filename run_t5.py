@@ -10,13 +10,13 @@ import time
 from datetime import datetime
 
 
-num_iters = 20
-batch_size = 1
+num_iters = 10000
+batch_size = 8
 
 
 model = 't5-base'
 in_text = "Hello, how are you doing?"
-task_pipe = pipeline("translation_en_to_fr", model=model, max_length=1028, device=0)
+task_pipe = pipeline("translation_en_to_fr", model=model, max_length=1028, device=1)
 output = task_pipe(in_text)
 
 
@@ -36,10 +36,11 @@ print('T5 translation')
 print(datetime.now())
 t0 = time.time()
 for i in range(0,num_iters):
-    task_pipe = pipeline("translation_en_to_fr", model=model, max_length=1028, device=0)
+    task_pipe = pipeline("translation_en_to_fr", model=model, max_length=1028, device=1)
     output = task_pipe(in_texts)
 t1 = time.time()
 total = t1-t0
+print('Done', datetime.now())
 print('T5 total ', total)
 print()
 

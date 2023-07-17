@@ -1,0 +1,7 @@
+
+
+experiment1:  Run each model on input for varying batch sizes on different GPUs. Record runtime. Every 5 seconds run nvidia-smi to get memory and energy
+
+experiment2: run heavy load on GPU. Monitor memory, energy usage, temperature and clock rate to see when DVFS kicks in
+
+experiment3: Similar to experiment1 but for several models, get energy usage at a finer granularity (every 100ms)
