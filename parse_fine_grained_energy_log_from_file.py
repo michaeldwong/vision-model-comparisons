@@ -42,7 +42,7 @@ with open(infile, 'r') as f:
         items = line.split(',')
         if len(items) == 0:
             continue
-        cumulative_energy = calculate_cumulative_energy(energy_file, items[1], items[2])
+        cumulative_energy = calculate_cumulative_energy(energy_file, items[1].strip(), items[2].strip())
         if items[0] not in model_to_energies:
             model_to_energies[items[0]] = []
         model_to_energies[items[0]].append(cumulative_energy)
